@@ -7,8 +7,6 @@ module Mutations
     type Types::ProjectType
 
     def resolve(**options)
-      authorize! Project, to: :create?
-
       result = ::CreateProject.call(
         project_params: options,
         current_user: current_user
@@ -17,7 +15,7 @@ module Mutations
       if result.success?
         result.project
       else
-        format_errors project: result.project
+        nil
       end
     end
   end

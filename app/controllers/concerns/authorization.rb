@@ -2,6 +2,9 @@ module Authorization
   extend ActiveSupport::Concern
 
   included do
+    include Pundit
+    after_action :verify_authorized
+    rescue_from Pundit::NotAuthorizedError, with: :deny_access!
   end
 
   private

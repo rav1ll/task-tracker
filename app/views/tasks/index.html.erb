@@ -4,12 +4,17 @@
   <thead>
     <tr>
       <td>ID</td>
+      <th colspan="10"></th>
       <td>Project ID</td>
+      <th colspan="10"></th>
       <td>Title</td>
+      <th colspan="10"></th>
       <td>Description</td>
+      <th colspan="10"></th>
       <td>Requested at</td>
+      <th colspan="10"></th>
       <td>Deadline</td>
-      <th colspan="3"></th>
+      <th colspan="7"></th>
     </tr>
   </thead>
 
@@ -17,11 +22,17 @@
     <% @tasks.each do |task| %>
       <tr>
         <td><%= task.id %></td>
+        <th colspan="10"></th>
         <td><%= task.project_id %></td>
+        <th colspan="10"></th>
         <td><%= task.title %></td>
+        <th colspan="10"></th>
         <td><%= task.description %></td>
+        <th colspan="10"></th>
         <td><%= task.created_at.to_date.to_s(:rfc822) %></td>
+        <th colspan="10"></th>
         <td><%= task.deadline_at.to_date.to_s(:rfc822) %></td>
+        <th colspan="10"></th>
         <td><%= link_to 'Show', task %></td>
         <td><%= link_to 'Edit', edit_task_path(task) %></td>
         <td>
@@ -38,3 +49,4 @@
 </table>
 
 <%= link_to 'New Task', new_task_path %>
+

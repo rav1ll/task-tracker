@@ -1,21 +1,29 @@
 class TaskPolicy < ApplicationPolicy
-  alias_method :task, :record # the same as
-  # def task
-  #   record
-  # end
+  alias_method :task, :record
 
   def index?
-    user.present?
+    true
   end
 
   def show?
+    task.project.user_ids.include?(user.id)
   end
 
   def create?
-    task.project.user_id == user.id
+    user.present?
   end
 
-  relation_scope do |relation|
-    relation.where(project: user.projects)
+  def update?
+    show?
+  end
+
+  def destroy?
+    update?
+  end
+
+  class Scope < Scope
+    def resolve
+      scope.all
+    end
   end
 end

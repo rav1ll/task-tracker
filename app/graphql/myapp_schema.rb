@@ -4,21 +4,9 @@ class MyappSchema < GraphQL::Schema
 
   # For batch-loading (see https://graphql-ruby.org/dataloader/overview.html)
   use GraphQL::Dataloader
-  use GraphQL::Execution::Errors
-
-  rescue_from(ActionPolicy::Unauthorized) do |exp|
-    raise GraphQL::ExecutionError.new(
-      exp.result.message,
-      extensions: {
-        code: :unauthorized,
-        status: 401,
-        detail: exp.result.reasons.details
-      }
-    )
-  end
 
   # GraphQL-Ruby calls this when something goes wrong while running a query:
-  def self.type_error(*args)
+  def self.type_error(err)
     # if err.is_a?(GraphQL::InvalidNullError)
     #   # report to your bug tracker here
     #   return nil

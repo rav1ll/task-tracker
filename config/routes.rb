@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   post "/graphql", to: "graphql#execute"
 
   resources :projects
+  
   resources :tasks do
     resources :comments, only: %i[create edit update]
   end

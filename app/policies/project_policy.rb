@@ -7,7 +7,6 @@ class ProjectPolicy < ApplicationPolicy
 
   def show?
     user.present?
-    false
   end
 
   def create?
@@ -15,7 +14,7 @@ class ProjectPolicy < ApplicationPolicy
   end
 
   def update?
-    user.id == project.user_id
+    project.user_ids.include? user.id
   end
 
   def destroy?
